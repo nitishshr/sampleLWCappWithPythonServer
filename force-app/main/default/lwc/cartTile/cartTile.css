@@ -1,0 +1,35 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.checkbox_Container {
+    display: flex;
+    margin-left: 5px;
+}
+
+.delete-button {
+    position: absolute;
+    left:10px;
+    top:10px;
+    display: none;
+}
+
+.content:hover .delete-button {
+    display:inherit;
+}
+
+.content {
+    position: relative;
+}
+
+.save-button {
+    position: absolute;
+    right:10px;
+    top:10px;
+    display: none;
+}
+
+.content:hover .save-button {
+    display:inherit;
+}

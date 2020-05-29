@@ -1,0 +1,25 @@
+<template>
+    <div id="droppableDiv" ondrop={handleDrop} ondragover={allowDrop} style="height:400px; border:1px solid black; overflow:scroll;
+    background-color: rgb(40, 123, 134); position:relative">
+        <template if:true={show}>
+        <p style="font-weight: bold; font-size: medium; text-align: center;"> Drag items to add to cart</p>
+        </template>
+        <template if:false={show}>
+            <p style="font-weight: bold; font-size: medium; text-align: center;">Total Cart Items : {totalItems}</p>
+            <p style="font-weight: bold; font-size: medium; text-align: center;">Total Price: {totalPrice}</p>
+            <lightning-button variant="Brand" title="Submit Order" onclick={Order} label="Order" class="order-button"></lightning-button>
+            <p style="font-weight: bold; font-size: medium; text-align: center; color:red;">{err}</p>
+        </template>
+        <template if:true={garments}>
+            <lightning-layout multiple-rows="true">
+            <template for:each={garments} for:item="garment">
+                <lightning-layout-item style="margin : 10px auto;" key ={garment.extId} size="10">
+                     <c-cart-tile onstateupdate={stateUpdate} onupdatedprice={updatePrice} ondelete={handleDelete} garment={garment}></c-cart-tile>
+                </lightning-layout-item>
+                
+            </template>
+            </lightning-layout>
+           
+        </template>
+    </div>
+</template>

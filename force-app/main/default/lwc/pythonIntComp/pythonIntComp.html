@@ -1,0 +1,78 @@
+<template>
+    <lightning-layout>
+        <lightning-layout-item size="12">
+            <div>
+                <lightning-card
+                    title="Send data to python web server"
+                    icon-name="custom:custom63"
+                >
+                    <div class="slds-m-around_medium">
+                        <lightning-combobox
+                        name="type"
+                        label="Type"
+                        value={selectionValue}
+                        placeholder="Select type"
+                        options={options}
+                        onchange={handleSelectionChange} ></lightning-combobox>
+                        <br/>
+            
+                        <lightning-slider label="Price" step= "200" value={sliderValue} min="200" max="2000"
+                        onchange={handleSliderChange}
+                        ></lightning-slider>
+            
+                        <br/>
+                        
+                        <lightning-button variant="brand" label="Submit" 
+                        title="Primary action" onclick={getDetails} 
+                        class="slds-m-left_x-small">
+                        </lightning-button>
+            
+                        <lightning-button variant="brand" label="Get Everything!" 
+                        title="Primary action" onclick={getAll} 
+                        class="slds-m-left_x-small">
+                        </lightning-button>
+                    </div>
+                    
+                    
+                </lightning-card>
+                <template if:true={showSpinner}>
+                <lightning-spinner size="medium" alternative-text="Loading Data" ></lightning-spinner>
+                </template>
+                <template if:true={shopData}>
+                    <div style="height: 200px; text-align:center">
+                        <template for:each={shopData} for:item="data1">
+                        <lightning-card key={data1.label} title={data1.label}>
+                        
+                
+                        <lightning-datatable
+                                key={data1.label}
+                                key-field="id"
+                                hide-checkbox-column="true"  
+                                onrowaction={callRowAction}
+                                data={data1.data}
+                                columns={columns}>
+                        </lightning-datatable>
+                        </lightning-card>
+                    </template>
+                    </div>  
+                    </template>
+                    
+                    <template if:true={filteredResultsData}>
+                    <div style="height:200px; text-align:center">
+                        <lightning-card title="filtered records fetched">
+                            <lightning-datatable
+                                key-field="id"
+                                data={filteredResultsData}
+                                hide-checkbox-column="true"  
+                                onrowaction={callRowAction}
+                                columns={columns}>
+                            </lightning-datatable>
+                        </lightning-card>
+                    </div>
+                    </template> 
+                </div>
+        </lightning-layout-item>
+        
+    </lightning-layout>
+    
+</template>

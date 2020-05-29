@@ -1,0 +1,48 @@
+<template>
+    <div style="text-align: center; border: 2px solid blue; background-color: white;" class="content">
+    <template if:true={garment}>
+    <div class="button-container">
+        <lightning-button-icon
+                onclick={deleteOrderItem}
+                icon-name="utility:delete"
+                variant="bare"
+                size="large"
+                class="delete-button"
+            >
+        
+        </lightning-button-icon>
+        
+        <template if:true={modified}>
+            <lightning-button-icon
+                onclick={saveOrderItem}
+                icon-name="utility:check"
+                variant="bare"
+                size="large"
+                class="save-button"
+            ></lightning-button-icon>
+        </template>
+    </div>
+
+    <img src={garment.url} style="width:100px; height:100px" alt="problem loading image"/>
+    <template if:true={err}>
+    <p style="font-size: small; width:100%;"><span style="color: red; font-weight: bold;">Error : {err} </span>  </p>
+    </template>
+    <p style="font-size: small; width:100%;"><span style="color: black; font-weight: bold;">Name : </span>  {garment.name} </p>
+    <p style="font-size: small; width:100%;"><span style="color: black; font-weight: bold;">price : </span> {garment.price} </p>
+    <p style="font-size: small; width:100%;"><span style="color: black; font-weight: bold;">type : </span>  {garment.type} </p>
+    <div class="container">
+        <div style="width:50px">
+            <lightning-input type="number" label="Quantity" variant="label-stacked" required value={quantity} min="1"  step="1" name="quantity" onchange={handleChange}></lightning-input>
+        </div>
+        
+        <div class="checkbox_Container">
+            <lightning-input type="checkbox" label="Small" variant="label-stacked" name="small" onchange={handleChange}></lightning-input>
+            <lightning-input type="checkbox" label="Medium" onchange={handleChange} variant="label-stacked" checked name="medium" data-id="medium"></lightning-input>
+            <lightning-input type="checkbox" label="Large" onchange={handleChange} variant="label-stacked" name="large"></lightning-input>
+
+        </div>
+    </div>
+    <p style="font-size: small; width:100%;"><span style="color: black; font-weight: bold;">Price : </span>  {calculatePrice} </p>
+    </template>
+    </div>
+</template>
